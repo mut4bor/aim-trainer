@@ -1,0 +1,29 @@
+{
+  "name": "aim-trainer",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "npx eslint ./src",
+    "format": "npx eslint ./src --fix",
+    "dev": "vite",
+    "dev:host": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "axios": "^1.10.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vite-plugin-checker": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.4"
+  }
+}

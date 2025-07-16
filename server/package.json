@@ -1,0 +1,38 @@
+{
+  "name": "smart-mil-service",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "build": "tsc",
+    "migrate": "ts-node src/database/migrations.ts"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/**/*.ts"
+    ],
+    "ext": "ts",
+    "execMap": {
+      "ts": "ts-node -r tsconfig-paths/register"
+    },
+    "ignore": [
+      "node_modules"
+    ]
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.12",
+    "@types/pg": "^8.15.4",
+    "nodemon": "^3.1.10",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  }
+}
