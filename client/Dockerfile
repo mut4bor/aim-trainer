@@ -2,10 +2,10 @@ FROM node:24-alpine
 
 WORKDIR /app
 
+RUN apk update && apk add bash
 COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build
 
-CMD ["npm", "run", "preview:host"]
+ENTRYPOINT ["bash", "entrypoint.sh"]
