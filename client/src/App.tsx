@@ -165,7 +165,7 @@ const AimTrainer = () => {
       <div className="rounded-lg w-full max-w-7xl mx-auto flex gap-4 flex-col h-full">
         <div className="bg-white p-4 rounded-lg shadow-lg w-full flex-shrink-0">
           <h1 className="text-3xl font-bold text-center">
-            Aim Test by Matvey Molchanov
+            Оценка техники наведения курсора на цель
           </h1>
         </div>
 

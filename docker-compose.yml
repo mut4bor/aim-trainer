@@ -1,37 +1,37 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15
+    networks:
+      - aim-trainer
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
 
   server:
-    build: ./server
+    image: 172.16.0.100:8011/aim-trainer-server
+    networks:
+      - aim-trainer
     ports:
-      - '3000:3000'
+      - '8062:3000'
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DATABASE: ${DB_DATABASE}
+      - PORT
+      - DB_HOST
+      - DB_PORT
+      - DB_USERNAME
+      - DB_PASSWORD
+      - DB_DATABASE
     depends_on:
       - postgres
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
 
   client:
-    build: ./client
+    image: 172.16.0.100:8011/aim-trainer-client
+    networks:
+      - aim-trainer
     ports:
-      - '80:80'
+      - '8061:4173'
     environment:
       VITE_API_URL: ${VITE_API_URL}
     depends_on:
@@ -39,3 +39,5 @@ services:
 
 volumes:
   postgres_data:
+networks:
+  aim-trainer:

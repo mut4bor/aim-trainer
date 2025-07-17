@@ -10,9 +10,9 @@
   },
   "nodemonConfig": {
     "watch": [
-      "src/**/*.ts"
+      "*.*"
     ],
-    "ext": "ts",
+    "ext": "*",
     "execMap": {
       "ts": "ts-node -r tsconfig-paths/register"
     },
