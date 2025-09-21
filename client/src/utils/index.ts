@@ -88,7 +88,7 @@ export const calculateTimeScore = (actualTimeMs: number): number => {
 
 export const calculateCanvasSize = (): number => {
   const windowHeight = window.innerHeight
-  const headerHeight = 100
+  const headerHeight = 92
   const padding = 32
   const gap = 16
   const availableHeight = windowHeight - headerHeight - padding - gap
