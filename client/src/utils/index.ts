@@ -86,18 +86,5 @@ export const calculateTimeScore = (actualTimeMs: number): number => {
   return Math.max(0, score)
 }
 
-export const calculateCanvasSize = (): number => {
-  const windowHeight = window.innerHeight
-  const headerHeight = 92
-  const padding = 32
-  const gap = 16
-  const availableHeight = windowHeight - headerHeight - padding - gap
-
-  const minSize = 200
-  const maxSize = 800
-
-  return Math.min(maxSize, Math.max(minSize, availableHeight))
-}
-
 export const getTotalScore = (result: RoundResult): number =>
   result.accuracyScore + result.distanceFromCenter + result.time.score

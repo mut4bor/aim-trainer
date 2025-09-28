@@ -12,8 +12,8 @@ const App = () => {
   const engine = useGameEngine(submitResults)
 
   return (
-    <div className="bg-gray-100 flex flex-col items-center p-4 min-h-screen">
-      <div className="rounded-lg w-full max-w-7xl mx-auto flex flex-col gap-4 flex-1">
+    <div className="bg-gray-100 flex flex-col items-center p-4 max-h-screen h-full">
+      <div className="rounded-lg w-full max-w-7xl mx-auto flex flex-col gap-4 flex-1 max-h-screen h-full">
         {/* Header */}
         <div className="bg-white p-4 rounded-lg shadow-lg w-full flex-shrink-0 grid grid-cols-[155px_1fr_155px] items-center relative">
           <img className="w-[155px] object-contain" src={Logo} alt="Логотип" />
@@ -23,7 +23,7 @@ const App = () => {
         </div>
 
         {/* Game area */}
-        <div className="flex gap-4 flex-row items-start flex-1 min-h-0">
+        <div className="flex gap-4 flex-row items-start flex-1 min-h-0 min-w-0">
           <GameCanvas
             canvasSize={engine.canvasSize}
             gameState={engine.gameState}
@@ -33,17 +33,18 @@ const App = () => {
             holdProgress={engine.holdProgress}
             onMouseMove={engine.handleMouseMove}
             onMouseClick={engine.handleMouseClick}
+            containerRef={engine.containerRef}
           />
-
-          <div className="flex flex-col gap-4 flex-1 min-w-0 overflow-y-auto">
-            <GameStatus
-              gameState={engine.gameState}
-              currentRound={engine.currentRound}
-            />
+          <div className="flex flex-col gap-4 flex-1 min-w-0 min-h-0 overflow-y-auto h-full">
             <GameNickname
               value={engine.nickNameValue}
               setValue={engine.setNickNameValue}
             />
+            <GameStatus
+              gameState={engine.gameState}
+              currentRound={engine.currentRound}
+            />
+
             <GameResults
               roundResults={engine.roundResults}
               gameState={engine.gameState}

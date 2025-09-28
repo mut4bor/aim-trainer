@@ -12,7 +12,9 @@ const GameNickname = ({ value, setValue }: Props) => {
       <input
         id="nickname-input"
         type="text"
-        className="border rounded px-3 py-2 w-full"
+        className={`border rounded px-3 py-2 w-full ${
+          value.trim() === '' ? 'border-red-500' : 'border-gray-300'
+        }`}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Введите никнейм"

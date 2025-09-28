@@ -1,4 +1,11 @@
-import { useState, useEffect, useCallback, MouseEvent } from 'react'
+import {
+  useState,
+  useEffect,
+  useCallback,
+  MouseEvent,
+  useRef,
+  RefObject,
+} from 'react'
 import {
   GameState,
   Point,
@@ -9,7 +16,6 @@ import {
 } from '@/types'
 import { BASE_GAME_CONFIG } from '@/constants'
 import {
-  calculateCanvasSize,
   generateTargetPosition,
   checkInCenter,
   calculateAccuracyScore,
@@ -30,6 +36,7 @@ type UseGameEngineReturn = {
   canvasSize: number
   handleMouseMove: (e: MouseEvent<HTMLCanvasElement>) => void
   handleMouseClick: () => void
+  containerRef: RefObject<HTMLDivElement | null>
 }
 
 /**
@@ -53,6 +60,7 @@ export const useGameEngine = (
   })
   const [roundResults, setRoundResults] = useState<RoundResult[]>([])
   const [isInCenter, setIsInCenter] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [canvasSize, setCanvasSize] = useState(400)
   const [holdProgress, setHoldProgress] = useState(0)
 
@@ -62,7 +70,13 @@ export const useGameEngine = (
 
   // обновление размера canvas при изменении окна
   useEffect(() => {
-    const updateSize = () => setCanvasSize(calculateCanvasSize())
+    const updateSize = () => {
+      if (!containerRef.current) {
+        return
+      }
+
+      setCanvasSize(containerRef.current.clientHeight)
+    }
     updateSize()
     window.addEventListener('resize', updateSize)
     return () => window.removeEventListener('resize', updateSize)
@@ -141,10 +155,13 @@ export const useGameEngine = (
 
   // старт игры
   const startGame = useCallback(() => {
+    if (!nickNameValue.trim()) {
+      return
+    }
     setGameState('preparing')
     setCurrentRound(0)
     setRoundResults([])
-  }, [])
+  }, [nickNameValue])
 
   // удержание курсора в центре → прогресс → старт/ресет
   useEffect(() => {
@@ -216,6 +233,7 @@ export const useGameEngine = (
   }, [gameState, roundResults, submitResults, nickNameValue])
 
   return {
+    containerRef,
     nickNameValue,
     setNickNameValue,
     gameState,

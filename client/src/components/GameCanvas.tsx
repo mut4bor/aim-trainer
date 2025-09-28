@@ -1,4 +1,4 @@
-import { useRef, useEffect, MouseEvent } from 'react'
+import { useRef, useEffect, MouseEvent, RefObject } from 'react'
 import { Point, GameState } from '@/types'
 import { BASE_GAME_CONFIG } from '@/constants'
 
@@ -11,6 +11,7 @@ interface Props {
   holdProgress?: number // ⬅️ прогресс удержания (0–1)
   onMouseMove: (e: MouseEvent<HTMLCanvasElement>) => void
   onMouseClick: () => void
+  containerRef: RefObject<HTMLDivElement | null>
 }
 
 const GameCanvas = ({
@@ -22,6 +23,7 @@ const GameCanvas = ({
   holdProgress = 0,
   onMouseMove,
   onMouseClick,
+  containerRef,
 }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -112,7 +114,10 @@ const GameCanvas = ({
   ])
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-lg flex-shrink-0 aspect-square">
+    <div
+      className="flex items-center justify-center flex-shrink-0 h-full aspect-square bg-white rounded-lg shadow-lg"
+      ref={containerRef}
+    >
       <canvas
         ref={canvasRef}
         width={canvasSize}
